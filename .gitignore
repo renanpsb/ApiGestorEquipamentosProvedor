@@ -1,0 +1,11 @@
+# dependencies
+/node_modules
+
+/.idea
+/.vscode
+
+/src/styles/tailwind.css
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
