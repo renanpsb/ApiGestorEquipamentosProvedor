@@ -7,7 +7,9 @@ import File from '../models/File';
 class SessionController {
   async store(req, res) {
     const schema = Yup.object().shape({
-      email: Yup.string().email().required(),
+      email: Yup.string()
+        .email()
+        .required(),
       password: Yup.string().required(),
     });
 
@@ -25,7 +27,6 @@ class SessionController {
           attributes: ['id', 'path', 'url'],
         },
       ],
-
     });
 
     if (!user) {
@@ -37,9 +38,8 @@ class SessionController {
     }
 
     const {
-      id, name, avatar, role,
-    } = user;
-
+ id, name, avatar, role 
+} = user;
 
     return res.status(200).json({
       user: {
@@ -64,8 +64,8 @@ class SessionController {
       const { id } = jwt.verify(token, authConfig.secret);
 
       const {
-        name, email, cpf, telefone, role, avatar,
-      } = await User.findOne({
+ name, email, cpf, telefone, role, avatar 
+} = await User.findOne({
         where: { id },
         include: [
           {
@@ -74,7 +74,6 @@ class SessionController {
             attributes: ['id', 'path', 'url'],
           },
         ],
-
       });
 
       const updatedAccessToken = jwt.sign({ id }, authConfig.secret, {
@@ -83,7 +82,13 @@ class SessionController {
 
       const response = {
         user: {
-          id, name, email, cpf, telefone, role, avatar,
+          id,
+          name,
+          email,
+          cpf,
+          telefone,
+          role,
+          avatar,
         },
         token_access: updatedAccessToken,
       };

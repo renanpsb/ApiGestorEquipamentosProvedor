@@ -2,6 +2,14 @@ import * as Yup from 'yup';
 import Sistema from '../models/Sistema';
 
 class SistemaController {
+  async index(req, res) {
+    const sistemas = await Sistema.findAll({
+      // where: { deletedAt: null },
+    });
+
+    return res.json(sistemas);
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),

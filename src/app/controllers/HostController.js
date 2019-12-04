@@ -51,6 +51,25 @@ class HostController {
     return res.json(hosts);
   }
 
+  async getOne(req, res) {
+    const hosts = await Host.findAll({
+      where: { deletedAt: null, id: req.params.id },
+      include: [
+        {
+          model: Sistema,
+          as: 'sistema',
+          attributes: ['id', 'name'],
+        },
+        {
+          model: HostPop,
+          as: 'pa',
+          attributes: ['id', 'ssid', 'criptografia'],
+        },
+      ],
+    });
+    return res.json(hosts);
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
