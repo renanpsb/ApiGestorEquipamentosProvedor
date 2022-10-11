@@ -19,9 +19,9 @@ class App {
 
       socket.on('gpon traffic', (user) => {
         const conn = new RosApi({
-          host: '201.7.225.11',
+          host: 'ip_address',
           user: 'api_user',
-          password: '80s6d78g217e36t1287S^D(&*^&*^*()^%%',
+          password: 'user_password',
         });
         console.log('connected gpon traffic');
         conn
@@ -68,8 +68,8 @@ class App {
       socket.on('predio traffic', (data) => {
         const conn = new RosApi({
           host: data.predioAddress,
-          user: 'admin',
-          password: 'kekeziel0904',
+          user: 'user',
+          password: 'password',
         });
         console.log('connected predio traffic');
         conn
